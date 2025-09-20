@@ -1,0 +1,15 @@
+value_scaling:
+  price_per_kg: 6500
+  sigma_v: 0.2
+  bea_scaling_factor: 1.0
+capacity:
+  method: median
+bandits:
+  ts_alpha: 1.0
+  ts_beta: 1.0
+  ucb_c: 2.0
+  pl_tau: 0.1
+simulation:
+  num_auctions: 1000
+  seed: 42
+  num_runs: 5 # Added num_runs
