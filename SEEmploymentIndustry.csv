@@ -1,0 +1,88 @@
+﻿ , ,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023
+1,"    Space economy, private industries1",433,432,426,424,411,399,387,390,365,351,361,373
+2,"        Agriculture, forestry, fishing, and hunting",…,…,…,…,…,…,…,…,…,…,…,…
+3,            Farms,…,…,…,…,…,…,…,…,…,…,…,…
+4,"            Forestry, fishing, and related activities",…,…,…,…,…,…,…,…,…,…,…,…
+5,        Mining,0,0,0,0,0,0,0,0,0,0,0,0
+6,            Oil and gas extraction,0,0,0,0,0,0,0,0,0,0,0,0
+7,"            Mining, except oil and gas",0,0,0,0,0,0,0,0,0,0,0,0
+8,            Support activities for mining,0,0,0,0,0,0,0,0,0,0,0,0
+9,        Utilities,0,0,0,0,0,0,0,0,0,0,0,0
+10,        Construction,1,1,1,1,1,2,1,2,2,2,3,2
+11,        Manufacturing,136,137,133,131,128,118,116,123,112,111,104,109
+12,            Durable goods,134,134,131,130,127,117,115,122,111,110,103,108
+13,                Wood products,0,0,0,0,0,0,0,0,0,0,0,0
+14,                Nonmetallic mineral products,0,0,0,0,0,0,0,0,0,0,0,0
+15,                Primary metals,0,0,0,0,0,0,0,0,0,0,0,0
+16,                Fabricated metal products,1,2,2,2,2,2,1,1,1,1,1,1
+17,                Machinery,4,4,4,2,2,2,2,2,2,2,3,3
+18,                Computer and electronic products2,55,53,51,52,54,49,48,51,48,48,49,48
+19,"                Electrical equipment, appliances, and components",3,3,3,2,3,2,3,2,2,2,2,2
+20,"                Motor vehicles, bodies and trailers, and parts",0,0,0,0,0,0,0,0,0,0,0,0
+21,                Other transportation equipment3,68,68,68,69,65,59,58,64,57,54,46,52
+22,                Furniture and related products,0,0,0,0,0,0,0,0,0,0,0,0
+23,                Miscellaneous manufacturing,3,4,3,2,2,2,2,2,2,2,2,2
+24,            Nondurable goods,2,2,2,1,1,1,1,1,1,1,1,1
+25,                Food and beverage and tobacco products,1,1,1,0,0,0,0,0,0,0,0,0
+26,                Textile mills and textile product mills,0,0,0,0,0,0,0,0,0,0,0,0
+27,                Apparel and leather and allied products,0,0,0,0,0,0,0,0,0,0,0,0
+28,                Paper products,0,0,0,0,0,0,0,0,0,0,0,0
+29,                Printing and related support activities,0,0,0,0,0,0,0,0,0,0,0,0
+30,                Petroleum and coal products,0,0,0,0,0,0,0,0,0,0,0,0
+31,                Chemical products,0,0,0,0,0,0,0,0,0,0,0,0
+32,                Plastics and rubber products,1,1,1,0,0,0,0,0,0,0,0,0
+33,        Wholesale trade,94,90,87,91,91,94,93,89,87,84,88,85
+34,        Retail trade,3,4,4,4,6,5,6,7,5,6,6,6
+35,            Motor vehicle and parts dealers,0,0,0,0,0,0,0,0,0,0,0,0
+36,            Food and beverage stores,0,0,0,0,0,0,0,0,0,0,0,0
+37,            General merchandise stores,0,1,1,1,1,1,1,1,1,1,1,1
+38,            Other retail,3,3,3,4,5,4,5,6,4,5,5,5
+39,        Transportation and warehousing,6,5,5,4,4,4,5,4,5,4,6,6
+40,            Air transportation,2,2,1,1,1,1,2,1,1,1,2,2
+41,            Rail transportation,0,0,0,0,0,0,0,0,0,0,0,0
+42,            Water transportation,0,0,0,0,0,0,0,0,0,0,0,0
+43,            Truck transportation,3,3,3,3,3,3,3,3,3,3,4,3
+44,            Transit and ground passenger transportation,0,0,0,0,0,0,0,0,0,0,0,0
+45,            Pipeline transportation,0,0,0,0,0,0,0,0,0,0,0,0
+46,            Other transportation and support activities,0,0,0,0,0,0,0,0,0,0,0,0
+47,            Warehousing and storage,0,0,0,0,0,0,0,0,0,0,0,0
+48,        Information,120,123,125,118,108,106,98,93,85,75,72,70
+49,"            Publishing industries, except internet (includes software)",1,1,1,1,1,1,1,1,0,1,1,1
+50,            Motion picture and sound recording industries,0,0,0,0,0,0,0,0,0,0,0,0
+51,            Broadcasting and telecommunications4,117,120,122,115,105,103,95,90,82,72,69,67
+52,"            Data processing, internet publishing, and other information services",2,2,2,2,2,2,2,2,2,2,2,2
+53,"        Finance, insurance, real estate, rental, and leasing",1,1,0,1,1,1,0,0,0,0,1,1
+54,            Finance and insurance,1,1,0,1,1,1,0,0,0,0,1,1
+55,"                Federal Reserve banks, credit intermediation, and related activities",0,0,0,0,0,0,0,0,0,0,0,0
+56,"                Securities, commodity contracts, and investments",0,0,0,0,0,0,0,0,0,0,0,0
+57,                Insurance carriers and related activities,1,1,0,1,1,0,0,0,0,0,1,1
+58,"                Funds, trusts, and other financial vehicles",0,0,0,0,0,0,0,0,0,0,0,0
+59,            Real estate and rental and leasing,0,0,0,0,0,0,0,0,0,0,0,0
+60,                Real estate,0,0,0,0,0,0,0,0,0,0,0,0
+61,                    Housing,0,0,0,0,0,0,0,0,0,0,0,0
+62,                    Other real estate,0,0,0,0,0,0,0,0,0,0,0,0
+63,                Rental and leasing services and lessors of intangible assets,0,0,0,0,0,0,0,0,0,0,0,0
+64,        Professional and business services,49,50,50,51,49,47,42,42,39,40,49,52
+65,"            Professional, scientific, and technical services",48,48,48,48,45,43,40,39,37,37,46,49
+66,                Legal services,0,0,0,0,0,0,0,0,0,0,0,0
+67,                Computer systems design and related services,4,3,3,4,4,5,4,4,4,5,5,4
+68,"                Miscellaneous professional, scientific, and technical services",44,46,45,45,42,39,36,36,33,33,41,44
+69,            Management of companies and enterprises,1,1,1,1,1,1,1,1,1,1,1,1
+70,            Administrative and waste management services,0,1,1,2,2,2,2,2,2,2,2,2
+71,                Administrative and support services,0,1,1,2,2,2,2,2,2,2,2,2
+72,                Waste management and remediation services,0,0,0,0,0,0,0,0,0,0,0,0
+73,"        Educational services, health care, and social assistance",22,21,21,22,21,21,24,26,30,29,33,41
+74,            Educational services,21,21,20,21,20,20,23,25,29,28,31,41
+75,            Health care and social assistance,1,1,1,1,1,1,1,1,0,1,2,1
+76,                Ambulatory health care services,0,0,0,0,0,0,0,0,0,0,0,0
+77,                Hospitals,1,1,1,1,1,1,1,1,0,1,2,1
+78,                Nursing and residential care facilities,0,0,0,0,0,0,0,0,0,0,0,0
+79,                Social assistance,0,0,0,0,0,0,0,0,0,0,0,0
+80,"        Arts, entertainment, recreation, accommodation, and food services",1,1,1,1,1,1,1,1,1,1,1,1
+81,"            Arts, entertainment, and recreation",1,1,1,1,1,1,1,1,1,1,1,1
+82,"                Performing arts, spectator sports, museums, and related activities",1,1,1,1,1,1,1,1,1,1,1,1
+83,"                Amusements, gambling, and recreation industries",0,0,0,0,0,0,0,0,0,0,0,0
+84,            Accommodation and food services,0,0,0,0,0,0,0,0,0,0,0,0
+85,                Accommodation,0,0,0,0,0,0,0,0,0,0,0,0
+86,                Food services and drinking places,0,0,0,0,0,0,0,0,0,0,0,0
+87,"        Other services, except government",0,0,0,0,0,0,0,0,0,0,0,0

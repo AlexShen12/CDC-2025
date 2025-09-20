@@ -1,0 +1,100 @@
+﻿ , ,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023
+1,Space economy1,"189,438","195,060","198,159","205,244","204,806","207,911","209,100","216,523","209,460","214,301","234,618","240,891"
+2,    Private industries,"160,095","165,699","167,839","173,895","172,726","175,789","175,153","178,698","171,021","173,993","190,221","192,397"
+3,"        Agriculture, forestry, fishing, and hunting",…,…,…,…,…,…,…,…,…,…,…,…
+4,            Farms,…,…,…,…,…,…,…,…,…,…,…,…
+5,"            Forestry, fishing, and related activities",…,…,…,…,…,…,…,…,…,…,…,…
+6,        Mining,67,51,65,57,33,13,6,7,3,3,3,3
+7,            Oil and gas extraction,50,38,48,41,23,9,4,5,2,2,2,2
+8,"            Mining, except oil and gas",0,0,0,1,1,1,0,0,0,0,0,0
+9,            Support activities for mining,17,13,17,15,9,3,2,2,1,1,1,1
+10,        Utilities,2,1,1,3,3,3,2,2,2,2,2,2
+11,        Construction,347,325,488,592,632,913,569,"1,802","1,618",995,"1,375","1,532"
+12,        Manufacturing,"56,382","56,773","54,426","53,404","51,639","50,217","50,876","55,523","52,319","52,479","57,260","59,869"
+13,            Durable goods,"55,583","55,914","53,610","53,065","51,249","49,848","50,516","55,226","52,050","52,172","56,870","59,480"
+14,                Wood products,30,15,25,6,6,5,6,5,4,11,7,7
+15,                Nonmetallic mineral products,84,95,99,39,40,39,41,37,35,36,41,41
+16,                Primary metals,70,72,111,88,61,60,49,41,44,49,61,60
+17,                Fabricated metal products,340,566,421,470,420,364,254,241,237,312,339,343
+18,                Machinery,"1,159","1,102","1,035",627,639,636,671,629,587,711,801,805
+19,                Computer and electronic products2,"32,473","32,261","29,001","29,583","30,154","28,613","29,146","30,138","28,754","29,047","30,323","30,062"
+20,"                Electrical equipment, appliances, and components",776,889,902,766,815,742,791,722,613,634,731,755
+21,"                Motor vehicles, bodies and trailers, and parts",3,3,3,2,2,2,1,1,1,1,2,1
+22,                Other transportation equipment3,"19,867","19,882","21,064","21,022","18,636","18,879","19,016","22,918","21,342","20,832","23,875","26,716"
+23,                Furniture and related products,23,27,26,14,12,13,12,10,11,10,12,12
+24,                Miscellaneous manufacturing,758,"1,002",923,449,464,496,529,483,421,527,679,678
+25,            Nondurable goods,800,858,816,339,390,369,360,296,269,308,390,388
+26,                Food and beverage and tobacco products,300,402,409,175,176,164,164,125,132,150,202,201
+27,                Textile mills and textile product mills,20,26,23,12,19,15,16,12,10,11,15,15
+28,                Apparel and leather and allied products,16,21,19,10,16,13,14,10,8,9,12,12
+29,                Paper products,22,66,50,25,27,39,28,27,20,28,29,29
+30,                Printing and related support activities,43,38,32,10,10,7,8,11,7,6,5,5
+31,                Petroleum and coal products,57,17,16,6,12,9,38,31,27,23,24,24
+32,                Chemical products,135,33,27,22,15,11,10,9,7,8,9,9
+33,                Plastics and rubber products,207,256,240,78,115,111,82,71,58,73,93,93
+34,        Wholesale trade,"30,469","32,308","34,226","38,436","40,486","44,876","47,107","44,013","44,359","49,151","54,917","54,183"
+35,        Retail trade,270,334,342,417,558,473,552,746,513,776,766,849
+36,            Motor vehicle and parts dealers,1,1,1,1,1,0,0,1,1,1,1,1
+37,            Food and beverage stores,1,1,1,1,1,1,1,2,1,2,2,2
+38,            General merchandise stores,38,45,48,54,75,65,76,105,77,103,110,123
+39,            Other retail,231,286,292,361,481,407,474,638,434,670,653,724
+40,        Transportation and warehousing,"1,711","1,522","1,374","1,308","1,319","1,317","1,652","1,364","1,266","1,320","2,423","2,338"
+41,            Air transportation,970,783,611,623,611,516,766,483,361,310,"1,084","1,199"
+42,            Rail transportation,3,1,2,2,3,5,4,4,4,5,7,4
+43,            Water transportation,1,1,1,1,2,0,1,2,2,2,0,0
+44,            Truck transportation,710,717,745,670,676,774,859,827,862,974,"1,300","1,100"
+45,            Transit and ground passenger transportation,0,0,0,0,0,0,0,1,0,0,0,1
+46,            Pipeline transportation,0,0,0,0,1,2,2,2,1,1,1,1
+47,            Other transportation and support activities,23,15,10,8,22,15,14,39,33,23,26,28
+48,            Warehousing and storage,4,4,3,2,4,5,5,6,3,4,5,4
+49,        Information,"57,497","60,674","63,157","64,999","63,461","62,747","59,553","59,519","56,217","52,770","52,106","51,054"
+50,"            Publishing industries, except internet (includes software)",402,348,319,537,454,378,290,314,319,351,412,507
+51,            Motion picture and sound recording industries,51,53,51,49,46,57,50,59,46,47,53,63
+52,            Broadcasting and telecommunications4,"56,222","59,370","61,864","63,319","61,733","60,989","57,900","57,716","54,493","50,943","50,071","48,810"
+53,"            Data processing, internet publishing, and other information services",822,903,922,"1,094","1,229","1,322","1,313","1,429","1,359","1,428","1,570","1,674"
+54,"        Finance, insurance, real estate, rental, and leasing",436,265,212,318,377,312,245,207,151,167,348,369
+55,            Finance and insurance,434,263,210,315,371,306,239,199,141,158,339,359
+56,"                Federal Reserve banks, credit intermediation, and related activities",12,11,10,18,28,28,20,19,17,28,28,28
+57,"                Securities, commodity contracts, and investments",5,6,7,8,12,40,10,9,11,13,14,15
+58,                Insurance carriers and related activities,417,246,193,288,331,238,210,171,114,117,297,315
+59,"                Funds, trusts, and other financial vehicles",1,0,0,0,0,0,0,0,0,0,0,0
+60,            Real estate and rental and leasing,1,2,2,3,6,7,6,8,10,9,9,10
+61,                Real estate,0,1,1,2,3,4,4,4,6,5,6,6
+62,                    Housing,0,0,0,0,1,1,1,1,1,1,1,1
+63,                    Other real estate,0,1,1,1,2,3,3,3,5,4,4,4
+64,                Rental and leasing services and lessors of intangible assets,1,1,1,2,3,3,3,3,3,3,4,4
+65,        Professional and business services,"10,642","11,185","11,304","12,005","11,867","12,568","11,834","12,535","11,388","13,067","17,006","17,193"
+66,"            Professional, scientific, and technical services","10,418","10,929","11,087","11,722","11,451","12,176","11,506","12,177","11,074","12,741","16,631","16,764"
+67,                Legal services,1,1,1,2,2,2,2,2,2,2,2,2
+68,                Computer systems design and related services,723,515,575,678,710,"1,022",833,871,883,"1,165","1,336","1,205"
+69,"                Miscellaneous professional, scientific, and technical services","9,693","10,413","10,511","11,042","10,739","11,153","10,671","11,304","10,189","11,573","15,293","15,557"
+70,            Management of companies and enterprises,203,210,147,189,296,252,200,225,189,190,204,233
+71,            Administrative and waste management services,21,45,70,94,119,140,129,132,126,137,171,196
+72,                Administrative and support services,21,45,70,94,119,140,129,132,126,137,171,196
+73,                Waste management and remediation services,0,0,0,0,0,0,0,0,0,0,0,0
+74,"        Educational services, health care, and social assistance","2,153","2,129","2,100","2,209","2,196","2,175","2,575","2,787","3,006","3,074","3,831","4,806"
+75,            Educational services,"2,059","2,031","2,016","2,111","2,090","2,063","2,444","2,678","2,950","2,953","3,462","4,675"
+76,            Health care and social assistance,94,97,84,98,106,111,131,109,56,121,369,131
+77,                Ambulatory health care services,2,2,2,3,4,4,4,4,3,4,5,4
+78,                Hospitals,91,95,82,95,102,107,127,104,52,116,364,126
+79,                Nursing and residential care facilities,0,0,0,0,0,0,0,0,0,0,0,0
+80,                Social assistance,0,0,0,0,0,0,0,0,0,0,0,0
+81,"        Arts, entertainment, recreation, accommodation, and food services",114,129,142,142,150,170,176,189,174,183,178,194
+82,"            Arts, entertainment, and recreation",111,125,138,139,147,167,173,186,173,181,175,189
+83,"                Performing arts, spectator sports, museums, and related activities",110,125,138,138,147,167,173,186,172,181,174,189
+84,"                Amusements, gambling, and recreation industries",0,0,0,0,0,0,0,0,0,0,0,0
+85,            Accommodation and food services,3,4,4,4,3,3,3,3,2,2,3,5
+86,                Accommodation,3,4,4,4,3,3,3,3,2,2,3,5
+87,                Food services and drinking places,0,0,0,0,0,0,0,0,0,0,0,0
+88,"        Other services, except government",4,4,4,4,5,5,4,5,5,6,6,6
+89,    Government5,"29,343","29,362","30,319","31,349","32,080","32,122","33,946","37,824","38,439","40,308","44,397","48,494"
+90,        Federal,"26,743","26,894","27,861","28,840","29,618","29,730","31,205","34,771","35,065","36,836","40,205","43,561"
+91,            General government,"26,740","26,891","27,858","28,837","29,615","29,727","31,202","34,767","35,062","36,826","40,202","43,558"
+92,                National defense,"5,308","5,290","5,429","5,478","5,958","6,047","6,525","7,171","8,043","9,468","11,468","13,455"
+93,                Nondefense,"21,432","21,602","22,429","23,360","23,657","23,680","24,677","27,596","27,019","27,358","28,734","30,103"
+94,            Government enterprises,3,3,3,2,3,3,3,3,2,9,3,3
+95,        State and local,"2,600","2,467","2,459","2,509","2,462","2,392","2,742","3,054","3,374","3,472","4,191","4,932"
+96,            General government,"2,600","2,467","2,459","2,509","2,462","2,392","2,742","3,054","3,374","3,472","4,191","4,932"
+97,            Government enterprises,0,0,0,0,0,0,0,0,0,0,0,0
+,Addendum:,,,,,,,,,,,,
+98,"Space economy excluding satellite television, satellite radio, and educational services6","144,575 ","147,523 ","148,349 ","154,343 ","155,575 ","158,839 ","163,131 ","170,712 ","166,528 ","175,500 ","197,043 ","204,884 "
