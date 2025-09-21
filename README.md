@@ -1,5 +1,7 @@
 # Mechanism Design Simulation Platform for Smallsat Rideshare Allocation
 
+### we used ai for logic, structure, and styling.
+
 ## 1. Overview
 
 This project is an interactive simulation platform for exploring and analyzing auction mechanisms for allocating small satellite (smallsat) rideshare launch slots. The platform addresses a critical challenge in **mechanism design**: how to create rules for allocating scarce resources when participants (agents) have private information and act strategically.
