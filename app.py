@@ -328,13 +328,10 @@ def load_learning_curve_data(policy_explanations):
         if not all_runs_dfs:
             continue
 
-        # Concatenate all runs for the policy
         concat_df = pd.concat(all_runs_dfs)
         
-        # Calculate mean and std dev across runs
         learning_curve = concat_df.groupby('auction_id')['cum_avg_revenue'].agg(['mean', 'std']).reset_index()
         
-        # Apply a rolling average to smooth the mean curve
         learning_curve['mean_smoothed'] = learning_curve['mean'].rolling(window=50, min_periods=1).mean()
         
         learning_curve_data[policy_name] = learning_curve
@@ -366,7 +363,6 @@ else:
         )
         .reset_index()
     )
-    # Add full policy names
     policy_summary['full_policy_name'] = policy_summary['policy'].map(policy_display_names)
 
     default_rf = float(max(0.0, summary_df["expected_revenue"].min() * 0.25))
@@ -409,13 +405,11 @@ else:
         """
     )
 
-    # Convert surface_samples to DataFrame for plotting
     surface_df = pd.DataFrame(surface_samples)
 
     if not surface_df.empty:
         fig_volatility_surface = go.Figure()
 
-        # Add scatter plot
         for policy in surface_df['policy'].unique():
             policy_df = surface_df[surface_df['policy'] == policy]
             fig_volatility_surface.add_trace(go.Scatter3d(
@@ -556,12 +550,10 @@ else:
         "We split win rates between incumbents and entrants to check whether each policy keeps the rideshare market open to newcomers while still rewarding reliable providers."
     )
 
-    # Reshape data for stacked bar chart
     inclusion_df = policy_summary[["policy", "inclusion_rate", "full_policy_name"]].copy() # Include full_policy_name
     inclusion_df["entrant_pct"] = inclusion_df["inclusion_rate"] * 100
     inclusion_df["incumbent_pct"] = 100 - inclusion_df["entrant_pct"]
 
-    # Melt the DataFrame to have 'category' and 'percentage' columns for stacking
     melted_inclusion_df = inclusion_df.melt(
         id_vars=["policy", "full_policy_name"], # Include full_policy_name in id_vars
         value_vars=["incumbent_pct", "entrant_pct"],
@@ -572,8 +564,6 @@ else:
         {"incumbent_pct": "Incumbents", "entrant_pct": "Entrants"}
     )
 
-    # --- New: Transform for Diverging Bar Chart ---
-    # Make Incumbent percentages negative for diverging bar chart
     melted_inclusion_df.loc[melted_inclusion_df['Provider Type'] == 'Incumbents', 'Share of Wins (%)'] *= -1
 
     fig_inclusion = px.bar(
@@ -592,7 +582,6 @@ else:
         barmode='relative' # Important for diverging bars
     )
 
-    # Customize layout for diverging bars
     fig_inclusion.update_layout(
         xaxis_title="Share of Wins (%)",
         yaxis_title="Policy",
@@ -601,7 +590,6 @@ else:
         xaxis_tickformat=".0f",
         hovermode="y unified"
     )
-    # Add a vertical line at 0 for clarity
     fig_inclusion.add_vline(x=0, line_width=1, line_dash="dash", line_color="gray")
 
     st.plotly_chart(fig_inclusion)
@@ -663,12 +651,10 @@ else:
     st.write("Visualize the probability of each arm being optimal over time, allowing for detailed analysis of policy learning and performance.")
     st.markdown(
         r"""
-        ### What are Optimal Arm Probabilities?
         In the context of Multi-Armed Bandit (MAB) problems, an "optimal arm" is the arm (e.g., a launch provider or auction mechanism) that yields the highest true expected reward. Since these true rewards are unknown, policies must learn them through exploration.
 
         The **Optimal Arm Probability ($p_{optimal}$)** for a given arm represents the probability that this arm is, in fact, the true optimal arm among all available arms, given the data observed so far. This metric is crucial for understanding how confident a policy is in its assessment of each arm's quality. A higher $p_{optimal}$ indicates greater confidence that the arm is indeed the best.
 
-        ### The Math Behind $p_{optimal}$
         The calculation of $p_{optimal}$ typically involves Bayesian inference, especially when using algorithms like Thompson Sampling. For each arm $i$, we maintain a belief about its true success rate (or reward distribution). If we assume a Bernoulli reward distribution (success/failure) and use a Beta distribution as a conjugate prior for the success probability $p_i$, then after observing $\alpha_i-1$ successes and $\beta_i-1$ failures, the posterior distribution for $p_i$ is $\text{Beta}(\alpha_i, \beta_i)$.
 
         To find the probability that arm $i$ is optimal, we need to calculate:
@@ -684,7 +670,6 @@ else:
         """
     )
 
-    # Sidebar for this section
     st.sidebar.header("Optimal Arm Probabilities Controls")
     selected_run_id_opt_arm = st.sidebar.selectbox("Select Run ID for Optimal Arms", streamlit_helpers.get_run_ids(), key="opt_arm_run_id")
 
@@ -699,7 +684,6 @@ else:
             st.write(f"Displaying data for Run ID: **{selected_run_id_opt_arm}**")
             st.write("Configuration:", config_data)
 
-            # --- Sidebar Filters for Optimal Arm Probabilities ---
             st.sidebar.subheader("Optimal Arm Data Filters")
 
             all_mechanisms = optimal_probs_df['mechanism'].unique()
@@ -726,7 +710,6 @@ else:
                 key="opt_arm_context_years"
             )
 
-            # Time window slider
             min_t = int(optimal_probs_df['t'].min())
             max_t = int(optimal_probs_df['t'].max())
             selected_t_range = st.sidebar.slider(
@@ -737,7 +720,6 @@ else:
                 key="opt_arm_t_range"
             )
 
-            # Smoothing option
             st.sidebar.subheader("Optimal Arm Smoothing Options")
             enable_smoothing = st.sidebar.checkbox("Enable Smoothing (Rolling Mean)", value=False, key="opt_arm_smoothing")
             smoothing_window = 0
@@ -751,10 +733,8 @@ else:
                     key="opt_arm_smoothing_window"
                 )
 
-            # Animation option
             enable_animation = st.sidebar.checkbox("Enable Animation (by time 't')", value=False, key="opt_arm_animation")
 
-            # Arms filter and Top K Arms
             st.sidebar.subheader("Optimal Arm Selection")
             show_top_k_arms = st.sidebar.checkbox("Show Top K Arms", value=False, key="opt_arm_show_top_k")
             top_k_value = 0
@@ -776,7 +756,6 @@ else:
                     key="opt_arm_selected_arms"
                 )
 
-            # --- Data Filtering ---
             filtered_df = optimal_probs_df[
                 (optimal_probs_df['mechanism'].isin(selected_mechanisms)) &
                 (optimal_probs_df['policy'].isin(selected_policies)) &
@@ -785,7 +764,6 @@ else:
                 (optimal_probs_df['t'] <= selected_t_range[1])
             ].copy()
 
-            # Handle Top K Arms
             if show_top_k_arms and not filtered_df.empty:
                 arm_avg_p_optimal = filtered_df.groupby('arm')['p_optimal'].mean().nlargest(top_k_value).index.tolist()
                 filtered_df = filtered_df[filtered_df['arm'].isin(arm_avg_p_optimal)]
@@ -799,7 +777,6 @@ else:
             if filtered_df.empty:
                 st.warning("No data to display after applying filters.")
             else:
-                # --- Data Transformations ---
                 if enable_smoothing:
                     filtered_df['p_optimal_smoothed'] = filtered_df.groupby(['mechanism', 'policy', 'context_year', 'arm'])['p_optimal'].transform(
                         lambda x: x.rolling(window=smoothing_window, min_periods=1).mean()
@@ -941,3 +918,126 @@ st.markdown(
     By continuously refining these models and leveraging the insights gained, stakeholders can design more effective and resilient marketplaces for the burgeoning smallsat rideshare industry.
     """
 )
+st.header("Conclusion and Strategic Analysis")
+st.markdown("---")
+
+st.subheader("The Fundamental Trade-Offs in Mechanism Design")
+st.markdown("An optimal policy must navigate the inherent trade-offs between three competing strategic objectives. The following analysis illustrates that no single policy can simultaneously maximize all three, necessitating a deliberate strategic choice based on organizational priorities.")
+
+col1, col2, col3 = st.columns(3, gap="large")
+
+with col1:
+    with st.container(border=True, height=200):
+        st.markdown("<h4 style='text-align: center;'>Revenue Maximization</h4>", unsafe_allow_html=True)
+        st.markdown("<p style='text-align: center;'>Prioritizing the highest possible financial return from the allocation of launch slots.</p>", unsafe_allow_html=True)
+
+with col2:
+    with st.container(border=True, height=200):
+        st.markdown("<h4 style='text-align: center;'>Market Innovation & Inclusion</h4>", unsafe_allow_html=True)
+        st.markdown("<p style='text-align: center;'>Fostering a diverse supplier ecosystem by ensuring new or entrant providers can effectively compete for and win launch slots.</p>", unsafe_allow_html=True)
+
+with col3:
+    with st.container(border=True, height=200):
+        st.markdown("<h4 style='text-align: center;'>Risk Mitigation & Stability</h4>", unsafe_allow_html=True)
+        st.markdown("<p style='text-align: center;'>Ensuring a predictable and stable revenue stream by minimizing financial volatility.</p>", unsafe_allow_html=True)
+
+st.markdown("<br>", unsafe_allow_html=True)
+
+st.subheader("Decision Framework: The Efficient Frontier")
+st.markdown("The simulation results map an efficient frontier of optimal policies. A key strategic goal is to select a policy that operates on this frontier, as any policy within the interior is demonstrably sub-optimal.")
+
+colA, colB = st.columns(2, gap="large")
+
+with colA:
+    with st.container(border=True, height=200):
+        st.markdown("<h4 style='text-align: center;'>Sub-Optimal Interior</h4>", unsafe_allow_html=True)
+        st.markdown("Policies in this region are inefficient. They produce **lower revenue for an equivalent or greater level of risk** when compared to policies on the frontier.")
+
+with colB:
+    with st.container(border=True, height=200):
+        st.markdown("<h4 style='text-align: center;'>The Efficient Frontier</h4>", unsafe_allow_html=True)
+        st.markdown("Policies on the frontier are optimal, each offering the **maximum possible revenue for its specific level of risk**. The strategic decision lies in selecting the point on this frontier that best aligns with the platform's risk tolerance and strategic goals.")
+
+st.markdown("<br>", unsafe_allow_html=True)
+
+st.subheader("Key Performance Indicator Dashboard")
+st.markdown("This dashboard provides a high-level analysis of policy performance across critical market health indicators.")
+
+p_norm = policy_summary.copy()
+cols_to_normalize = ['expected_revenue', 'inclusion_rate', 'market_thickness_gap', 'regret', 'sharpe_like', 'revenue_volatility']
+for col in cols_to_normalize:
+    if (p_norm[col].max() - p_norm[col].min()) != 0:
+        p_norm[f'norm_{col}'] = (p_norm[col] - p_norm[col].min()) / (p_norm[col].max() - p_norm[col].min())
+    else:
+        p_norm[f'norm_{col}'] = 0.5
+cols_to_invert = ['revenue_volatility', 'market_thickness_gap', 'regret']
+for col in cols_to_invert:
+    p_norm[f'norm_{col}'] = 1 - p_norm[f'norm_{col}']
+
+dash_col1, dash_col2, dash_col3 = st.columns(3, gap="large")
+
+with dash_col1:
+    with st.container(border=True, height=300):
+        st.markdown("<h5 style='text-align: center;'>Market Competitiveness</h5>", unsafe_allow_html=True)
+        st.markdown("A smaller average bid gap between the top providers indicates a 'thicker', more competitive marketplace.")
+        best_gap_policy = p_norm.sort_values('norm_market_thickness_gap', ascending=False).iloc[0]
+        st.metric(
+            label="Most Competitive Policy (Lowest Bid Gap)",
+            value=f"{best_gap_policy['full_policy_name']}",
+            delta=f"{best_gap_policy['market_thickness_gap']:.3f} Avg. Bid Gap",
+            delta_color="inverse"
+        )
+
+with dash_col2:
+    with st.container(border=True, height=300):
+        st.markdown("<h5 style='text-align: center;'>Market Diversity</h5>", unsafe_allow_html=True)
+        st.markdown("A high entrant inclusion rate signals a market that is open to innovation and resilient to over-reliance on incumbents.")
+        best_inclusion_policy = policy_summary.loc[policy_summary["inclusion_rate"].idxmax()]
+        st.metric(
+            label="Highest Inclusion Policy",
+            value=f"{best_inclusion_policy['full_policy_name']}",
+            delta=f"{best_inclusion_policy['inclusion_rate']:.1%} Entrant Wins"
+        )
+        st.progress(best_inclusion_policy['inclusion_rate'], text="Entrant Share of Wins")
+
+with dash_col3:
+    with st.container(border=True, height=300):
+        st.markdown("<h5 style='text-align: center;'>Learning Efficiency</h5>", unsafe_allow_html=True)
+        st.markdown("An efficient policy learns the true quality of providers quickly, thereby minimizing 'regret'—the cumulative value lost from not choosing the optimal provider from the start.")
+        best_learning_policy = p_norm.sort_values('norm_regret', ascending=False).iloc[0]
+        st.metric(
+            label="Most Efficient Learner (Lowest Regret)",
+            value=f"{best_learning_policy['full_policy_name']}",
+            delta="Lowest Cumulative Regret",
+            delta_color="inverse"
+        )
+
+st.markdown("<br>", unsafe_allow_html=True)
+
+st.subheader("Actionable Insights for Stakeholders")
+st.markdown("The following recommendations are derived from the simulation analysis and are targeted toward key decision-makers in the rideshare ecosystem.")
+
+insight_tab1, insight_tab2, insight_tab3 = st.tabs(["For Platform Operators", "For New Entrants", "For Policy Makers"])
+
+with insight_tab1:
+    st.markdown("#### **Recommendations for Platform Operators**")
+    st.info("""
+    - **Align Policy with Strategy:** Use the Efficient Frontier analysis to consciously select a mechanism that aligns with your primary strategic goal, whether it is maximizing revenue, fostering innovation, or ensuring financial stability. There is no single 'best' policy.
+    - **Monitor Market Health KPIs:** Treat the **bid gap** and **entrant inclusion rate** as primary performance indicators, not just revenue. A widening bid gap is an early warning sign of declining competition that must be addressed proactively.
+    - **Leverage Learning Insights:** Use the learning analysis to diagnose market efficiency. If a high-quality provider is being consistently overlooked, consider adjusting the active policy’s exploration parameters to ensure they receive a fair evaluation.
+    """)
+
+with insight_tab2:
+    st.markdown("#### **Recommendations for New Entrants**")
+    st.info("""
+    - **Consistency is Your Greatest Asset:** The platform's learning algorithms reward reliability. A consistent track record of successful performance is the most direct way to increase your 'true quality' score and be identified as an optimal provider, leading to more launch allocations.
+    - **Understand the Active Mechanism:** Be aware of the platform's current strategic focus. An 'exploration-heavy' phase (e.g., a UCB-based policy) is a prime opportunity to win slots and build a reputation, even against established incumbents.
+    """)
+
+with insight_tab3:
+    st.markdown("#### **Recommendations for Policy Makers & Regulators**")
+    st.info("""
+    - **Promote Data Transparency:** The efficiency of all market mechanisms improves with more high-quality data. Regulations that encourage standardized performance reporting can accelerate the entire market's learning curve, leading to greater overall efficiency.
+    - **Quantify and Encourage Diversity:** Use metrics like the **entrant inclusion rate** to inform policies that prevent market monopolization. A diverse supplier base is critical for ensuring a resilient and innovative national launch capability.
+    """)
+
