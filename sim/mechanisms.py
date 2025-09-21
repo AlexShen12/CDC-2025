@@ -9,7 +9,7 @@ from sim.models import Provider, Payload, Context
 
 def get_payload_value(payload: Payload, context: Context, price_per_kg: float, sigma_v: float) -> float:
     """Calculates the value for a payload with some stochasticity."""
-    base_price = payload.mass_kg * price_per_kg * context.value_scale_usd
+    base_price = payload.mass_kg * price_per_kg
     # Introduce stochasticity based on a normal distribution
     epsilon = np.random.normal(0, sigma_v)
     value = base_price * (1 + epsilon)

@@ -1,47 +1,47 @@
 [
     {
-        "total_revenue": 6.854864768939557e+20,
+        "total_revenue": 5873063063.392098,
         "allocative_efficiency": 0.8184438040345822,
         "market_thickness_gap": 0.05211551256543887,
         "market_thickness_n_close": 1.697406340057637,
         "cumulative_regret": 16.109519344976007,
-        "inclusion_share_entrants": 0.0,
+        "inclusion_share_entrants": 0.8184438040345822,
         "run_idx": 0
     },
     {
-        "total_revenue": 7.239524826184714e+20,
+        "total_revenue": 6002882244.839945,
         "allocative_efficiency": 0.8100558659217877,
         "market_thickness_gap": 0.04609635387412097,
         "market_thickness_n_close": 1.888268156424581,
         "cumulative_regret": 11.462290724003534,
-        "inclusion_share_entrants": 0.0,
+        "inclusion_share_entrants": 0.8100558659217877,
         "run_idx": 1
     },
     {
-        "total_revenue": 7.500018753855821e+20,
+        "total_revenue": 6388661852.444471,
         "allocative_efficiency": 0.0784313725490196,
         "market_thickness_gap": 0.035157460607761405,
         "market_thickness_n_close": 2.2296918767507004,
         "cumulative_regret": 23.216153947369474,
-        "inclusion_share_entrants": 0.0,
+        "inclusion_share_entrants": 0.11764705882352941,
         "run_idx": 2
     },
     {
-        "total_revenue": 7.152983608843281e+20,
+        "total_revenue": 6154774454.161608,
         "allocative_efficiency": 0.9826086956521739,
         "market_thickness_gap": 0.06130466613536591,
         "market_thickness_n_close": 1.5217391304347827,
         "cumulative_regret": 0.38498607560665987,
-        "inclusion_share_entrants": 0.0,
+        "inclusion_share_entrants": 0.9826086956521739,
         "run_idx": 3
     },
     {
-        "total_revenue": 6.585104622491063e+20,
+        "total_revenue": 5912975338.697871,
         "allocative_efficiency": 0.8588235294117647,
         "market_thickness_gap": 0.05248515136637462,
         "market_thickness_n_close": 1.7882352941176471,
         "cumulative_regret": 9.55289080753116,
-        "inclusion_share_entrants": 0.0,
+        "inclusion_share_entrants": 0.8588235294117647,
         "run_idx": 4
     }
 ]

@@ -22,7 +22,7 @@ def infer_provider(row) -> str:
             return provider
     return str(row["Country"])
 
-def process_global_data(input_path: str, output_dir: str, incumbent_threshold: int = 2012) -> None:
+def process_global_data(input_path: str, output_dir: str, incumbent_threshold: int = 2009) -> None:
     """
     Processes the Global Space Exploration Dataset to create a list of missions and providers.
 

@@ -240,8 +240,8 @@ st.write(
     "We translate the simulation outputs into the language of Modern Portfolio Theory (MPT) so that each policy can be assessed in terms of risk, expected revenue, and strategic depth for the smallsat marketplace."
 )
 
-REVENUE_SCALE = 1e18
-REVENUE_UNIT_LABEL = "quintillion USD"
+REVENUE_SCALE = 1e6
+REVENUE_UNIT_LABEL = "million USD"
 
 
 def _coerce_boolean(series: pd.Series) -> pd.Series:
@@ -309,6 +309,38 @@ def load_policy_runs(policy_name: str, segments: int = 12):
                 }
             )
     return summaries, surface_points
+
+
+def load_learning_curve_data(policy_explanations):
+    learning_curve_data = {}
+    for policy_name in policy_explanations.keys():
+        all_runs_dfs = []
+        results_files = sorted(pathlib.Path("outputs").glob(f"results_{policy_name}_*.csv"))
+        if not results_files:
+            continue
+
+        for results_file in results_files:
+            df = pd.read_csv(results_file)
+            df["payment"] = df["payment"].astype(float)
+            df['cum_avg_revenue'] = df['payment'].expanding().mean() / REVENUE_SCALE
+            all_runs_dfs.append(df[['auction_id', 'cum_avg_revenue']])
+
+        if not all_runs_dfs:
+            continue
+
+        # Concatenate all runs for the policy
+        concat_df = pd.concat(all_runs_dfs)
+        
+        # Calculate mean and std dev across runs
+        learning_curve = concat_df.groupby('auction_id')['cum_avg_revenue'].agg(['mean', 'std']).reset_index()
+        
+        # Apply a rolling average to smooth the mean curve
+        learning_curve['mean_smoothed'] = learning_curve['mean'].rolling(window=50, min_periods=1).mean()
+        
+        learning_curve_data[policy_name] = learning_curve
+        
+    return learning_curve_data
+
 
 
 all_run_summaries = []
@@ -381,123 +413,109 @@ else:
     surface_df = pd.DataFrame(surface_samples)
 
     if not surface_df.empty:
-        fig_volatility_surface = px.scatter_3d(
-            surface_df,
-            x="risk",
-            y="expected_return",
-            z="inclusion_rate",
-            color="policy",
-            symbol="policy",
-            hover_name="policy",
+        fig_volatility_surface = go.Figure()
+
+        # Add scatter plot
+        for policy in surface_df['policy'].unique():
+            policy_df = surface_df[surface_df['policy'] == policy]
+            fig_volatility_surface.add_trace(go.Scatter3d(
+                x=policy_df["risk"],
+                y=policy_df["expected_return"],
+                z=policy_df["inclusion_rate"],
+                mode='markers',
+                marker=dict(
+                    size=5,
+                    symbol='circle'
+                ),
+                name=policy
+            ))
+
+        # Add convex hull
+        hull_points = surface_df[['risk', 'expected_return', 'inclusion_rate']].values
+        if len(hull_points) >= 4:
+            hull = ConvexHull(hull_points)
+            fig_volatility_surface.add_trace(go.Mesh3d(
+                x=hull_points[:, 0],
+                y=hull_points[:, 1],
+                z=hull_points[:, 2],
+                i=hull.simplices[:, 0],
+                j=hull.simplices[:, 1],
+                k=hull.simplices[:, 2],
+                opacity=0.1,
+                color='gray',
+                name='Convex Hull'
+            ))
+
+        fig_volatility_surface.update_layout(
             title="Convex Volatility Surface (Risk, Revenue, Inclusion)",
-            labels={
-                "risk": f"Risk (std. dev.), {REVENUE_UNIT_LABEL}",
-                "expected_return": f"Expected Revenue, {REVENUE_UNIT_LABEL}",
-                "inclusion_rate": "Entrant Share of Wins",
-            },
+            scene=dict(
+                xaxis_title=f"Risk (std. dev.), {REVENUE_UNIT_LABEL}",
+                yaxis_title=f"Expected Revenue, {REVENUE_UNIT_LABEL}",
+                zaxis_title="Entrant Share of Wins",
+            ),
             height=700
         )
+
         st.plotly_chart(fig_volatility_surface, use_container_width=True)
         plots_to_save["volatility_surface"] = fig_volatility_surface
     else:
         st.warning("No data available to plot the Convex Volatility Surface. Please run simulations.")
 
-    st.subheader("Capital Allocation Projection")
-    st.write(
-        "This 2D projection mirrors the classic Capital Allocation Line (CAL). It compares policy-level risk and return, draws the CAL through the best Sharpe point, and shows how far each mechanism sits from the efficient frontier."
-    )
-
-    # Create a DataFrame for plotting
-    plot_df = policy_summary.copy()
-
-    fig_frontier = go.Figure()
-
-    # Add policy outcomes
-    fig_frontier.add_trace(go.Scatter(
-        x=plot_df["revenue_volatility"],
-        y=plot_df["expected_revenue"],
-        mode='markers',
-        marker=dict(size=10, color='navy'),
-        name='Policy outcome'
-    ))
-
-    # Add convex hull (efficient frontier)
-    points = plot_df[["revenue_volatility", "expected_revenue"]].values
-    if len(points) >= 3:
-        hull = ConvexHull(points)
-        hull_points = points[hull.vertices]
-        hull_points = hull_points[hull_points[:, 0].argsort()]
-
-        efficient_frontier_points = []
-        for i in range(len(hull_points)):
-            is_dominated = False
-            for j in range(len(hull_points)):
-                if i != j and hull_points[j, 0] <= hull_points[i, 0] and hull_points[j, 1] >= hull_points[i, 1]:
-                    if hull_points[j, 0] < hull_points[i, 0] or hull_points[j, 1] > hull_points[i, 1]:
-                        is_dominated = True
-                        break
-            if not is_dominated:
-                efficient_frontier_points.append(hull_points[i])
-        efficient_frontier_points = np.array(efficient_frontier_points)
-        efficient_frontier_points = efficient_frontier_points[efficient_frontier_points[:, 0].argsort()]
-
-        fig_frontier.add_trace(go.Scatter(
-            x=efficient_frontier_points[:, 0],
-            y=efficient_frontier_points[:, 1],
-            mode='lines',
-            line=dict(color='steelblue', width=2),
-            name='Efficient frontier (convex hull)'
-        ))
-
-    # Add risk-free benchmark
-    fig_frontier.add_hline(
-        y=risk_free_rate,
-        line_dash="dot",
-        line_color="dimgray",
-        annotation_text="Risk-free benchmark",
-        annotation_position="bottom right"
-    )
-
-    # Add Capital Allocation Line
-    fig_frontier.add_trace(go.Scatter(
-        x=[0, tangency_row["revenue_volatility"]],
-        y=[risk_free_rate, tangency_row["expected_revenue"]],
-        mode='lines',
-        line=dict(color='darkorange', width=2),
-        name='Capital Allocation Line'
-    ))
-
-    # Add annotation for tangency point
-    fig_frontier.add_annotation(
-        x=tangency_row["revenue_volatility"],
-        y=tangency_row["expected_revenue"],
-        text=policy_display_names[tangency_row["policy"]],
-        showarrow=True,
-        arrowhead=1,
-        ax=10,
-        ay=-10,
-        font=dict(color="darkorange")
-    )
-
-    fig_frontier.update_layout(
-        title="Risk-Return Projection with Capital Allocation Line",
-        xaxis_title=f"Risk (std. dev.), {REVENUE_UNIT_LABEL}",
-        yaxis_title=f"Expected revenue, {REVENUE_UNIT_LABEL}",
-        hovermode="closest"
-    )
-
-    st.plotly_chart(fig_frontier)
-    # plots_to_save["capital_allocation_projection"] = fig_frontier # No longer saving Matplotlib figure
-
+    st.subheader("Time-Series Learning Curves")
     st.markdown(
-        "\n".join(
-            [
-                "- Policies above the CAL would dominate via better risk-adjusted revenue; points below suggest room to retune exploration intensity or pricing rules.",
-                "- The slope of the CAL is the implied Sharpe ratio, capturing how much additional revenue the tangency mechanism delivers per unit of volatility.",
-                "- Comparing points along the frontier helps prioritise which auction design to scale when aiming for a thicker yet efficient rideshare marketplace.",
-            ]
-        )
+        """
+        This plot shows the cumulative average revenue over simulation rounds for each policy.
+        The solid line represents the smoothed mean performance across all runs (seeds), and the shaded area
+        represents the variability (one standard deviation). This helps visualize how quickly each
+        policy converges to its long-run performance and how stable that performance is.
+        """
     )
+
+    learning_curve_data = load_learning_curve_data(policy_explanations)
+
+    if learning_curve_data:
+        fig_learning_curve = go.Figure()
+        colors = px.colors.qualitative.Plotly
+
+        for i, (policy, data) in enumerate(learning_curve_data.items()):
+            color = colors[i % len(colors)]
+            
+            fig_learning_curve.add_trace(go.Scatter(
+                x=data['auction_id'],
+                y=data['mean_smoothed'] + data['std'],
+                mode='lines',
+                line=dict(width=0),
+                showlegend=False,
+                name=f"{policy} upper",
+            ))
+            fig_learning_curve.add_trace(go.Scatter(
+                x=data['auction_id'],
+                y=data['mean_smoothed'] - data['std'],
+                mode='lines',
+                line=dict(width=0),
+                fillcolor=f'rgba({int(color[1:3], 16)}, {int(color[3:5], 16)}, {int(color[5:7], 16)}, 0.2)',
+                fill='tonexty',
+                showlegend=False,
+                name=f"{policy} lower",
+            ))
+            fig_learning_curve.add_trace(go.Scatter(
+                x=data['auction_id'],
+                y=data['mean_smoothed'],
+                mode='lines',
+                line=dict(color=color),
+                name=policy_display_names[policy]
+            ))
+
+        fig_learning_curve.update_layout(
+            title="Cumulative Average Revenue Learning Curves",
+            xaxis_title="Simulation Round (Auction ID)",
+            yaxis_title=f"Cumulative Average Revenue, {REVENUE_UNIT_LABEL}",
+            hovermode="x unified"
+        )
+        st.plotly_chart(fig_learning_curve, use_container_width=True)
+        plots_to_save["learning_curves"] = fig_learning_curve
+    else:
+        st.warning("No data available to plot learning curves. Please run simulations.")
 
     st.subheader("Thickness vs. Revenue (Market Depth)")
     st.write(

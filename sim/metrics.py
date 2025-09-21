@@ -62,8 +62,10 @@ def calculate_metrics(results: List[Dict], providers_df: pd.DataFrame, true_qual
     cumulative_regret = df["regret"].sum()
 
     # --- Inclusion ---
-    incumbent_map = providers_df.set_index("name")["incumbent_flag"].to_dict()
-    df["winner_is_incumbent"] = df["winner"].map(incumbent_map)
+    incumbent_threshold = 2009  # Align with ETL logic
+    first_year_map = providers_df.set_index("name")["first_year"].to_dict()
+    df["winner_first_year"] = df["winner"].map(first_year_map)
+    df["winner_is_incumbent"] = df["winner_first_year"] <= incumbent_threshold
     
     entrant_wins = df[df["winner_is_incumbent"] == False].shape[0]
     total_wins = df.shape[0]
