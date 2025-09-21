@@ -46,6 +46,9 @@ def run_simulation(
             return
         
         providers_df = sim_data["providers"]
+        # Rename 'provider' column to 'name' to match Provider Pydantic model
+        if 'provider' in providers_df.columns and 'name' not in providers_df.columns:
+            providers_df = providers_df.rename(columns={'provider': 'name'})
         payloads_catalog = sim_data["payloads_catalog"]
         contexts_df = sim_data["contexts"]
 
@@ -113,9 +116,9 @@ def run_simulation(
         all_runs_metrics.append(metrics)
         
         # Save raw results for each run (optional, can be commented out for large num_runs)
-        # results_df = metrics.pop("results_df")
-        # results_output_path = pathlib.Path(output_dir) / f"results_{policy}_{current_seed}.csv"
-        # results_df.to_csv(results_output_path, index=False)
+        results_df = metrics.pop("results_df")
+        results_output_path = pathlib.Path(output_dir) / f"results_{policy}_{current_seed}.csv"
+        results_df.to_csv(results_output_path, index=False)
         # print(f"Saved raw results for run {run_idx} to {results_output_path}")
 
     # Aggregate and save all runs metrics

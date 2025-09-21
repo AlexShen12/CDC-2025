@@ -1,0 +1,47 @@
+[
+    {
+        "total_revenue": 6.25493917074013e+20,
+        "allocative_efficiency": 0.08645533141210375,
+        "market_thickness_gap": 0.09259570592849009,
+        "market_thickness_n_close": 1.0,
+        "cumulative_regret": 78.48180748697821,
+        "inclusion_share_entrants": 0.0,
+        "run_idx": 0
+    },
+    {
+        "total_revenue": 6.74469114620588e+20,
+        "allocative_efficiency": 0.09497206703910614,
+        "market_thickness_gap": 0.0899932175353558,
+        "market_thickness_n_close": 1.0,
+        "cumulative_regret": 73.96587599193813,
+        "inclusion_share_entrants": 0.0,
+        "run_idx": 1
+    },
+    {
+        "total_revenue": 6.969380214580078e+20,
+        "allocative_efficiency": 0.06722689075630252,
+        "market_thickness_gap": 0.02572589461542865,
+        "market_thickness_n_close": 3.176470588235294,
+        "cumulative_regret": 34.529224277989684,
+        "inclusion_share_entrants": 0.0,
+        "run_idx": 2
+    },
+    {
+        "total_revenue": 6.6750874386472e+20,
+        "allocative_efficiency": 0.08985507246376812,
+        "market_thickness_gap": 0.07904635701375437,
+        "market_thickness_n_close": 1.2463768115942029,
+        "cumulative_regret": 42.036387726520616,
+        "inclusion_share_entrants": 0.0,
+        "run_idx": 3
+    },
+    {
+        "total_revenue": 6.395110474849064e+20,
+        "allocative_efficiency": 0.09117647058823529,
+        "market_thickness_gap": 0.10845972569409296,
+        "market_thickness_n_close": 1.0,
+        "cumulative_regret": 70.72783217314972,
+        "inclusion_share_entrants": 0.0,
+        "run_idx": 4
+    }
+]

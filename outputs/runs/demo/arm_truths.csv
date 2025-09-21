@@ -1,0 +1,4 @@
+run_id,arm,true_success_rate,incumbent_flag
+demo,arm_1,0.75,True
+demo,arm_2,0.5,False
+demo,arm_3,0.9,False

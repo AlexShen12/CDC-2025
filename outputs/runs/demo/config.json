@@ -1,0 +1,8 @@
+{
+  "run_id": "demo",
+  "mechanism": "mechanism_A",
+  "policy": "policy_X",
+  "n_arms": 3,
+  "n_periods": 10,
+  "notes": "Synthetic data for demo"
+}
